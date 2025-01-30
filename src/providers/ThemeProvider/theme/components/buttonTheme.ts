@@ -9,7 +9,8 @@ const baseStyle = defineStyle({
 const variantSolid = defineStyle(props => {
 	const { colorScheme: color } = props
 	const common = defineStyle({
-		border: 'none'
+		border: 'none',
+		fontWeight: 'base'
 	})
 
 	if (color === 'brand') {
@@ -153,6 +154,7 @@ const variantOutline = defineStyle(props => {
 		...common,
 		color: `${color}.200`,
 		borderColor: 'currentColor',
+
 		_hover: {
 			...common._hover,
 			bg: 'white',

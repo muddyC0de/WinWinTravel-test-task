@@ -6,15 +6,15 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const defaultControlStylesOnAction = {
 	bg: 'white',
-	borderColor: 'black'
+	borderColor: '#31393C'
 }
 
 const baseStyle = definePartsStyle({
 	control: {
 		bg: 'white',
-		borderWidth: '0.0625rem',
-		borderColor: 'black',
-		borderRadius: 0,
+		borderWidth: '2px',
+		borderColor: '#31393C',
+		borderRadius: 3,
 
 		_hover: {
 			...defaultControlStylesOnAction,
@@ -28,17 +28,18 @@ const baseStyle = definePartsStyle({
 		strokeWidth: '0.0625rem!important'
 	},
 	label: {
-		ml: '0.75rem'
+		ml: '0.75rem',
+		fontSize: '16px'
 	}
 })
 
 const mdSize = definePartsStyle({
 	control: {
-		w: '1.5rem',
-		h: '1.5rem'
+		w: '20px',
+		h: '20px'
 	},
 	icon: {
-		fontSize: '0.75rem'
+		fontSize: '0.65rem'
 	}
 })
 

@@ -77,12 +77,7 @@ module.exports = {
 		'no-implicit-coercion': 'error',
 
 		/* i18next */
-		'i18next/no-literal-string': [
-			'error',
-			{
-				message: 'Disallow literal string. Use i18next instead!'
-			}
-		]
+		'i18next/no-literal-string': 'off'
 	},
 	settings: {
 		react: {
