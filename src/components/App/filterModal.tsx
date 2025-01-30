@@ -24,7 +24,7 @@ export const FilterModal: React.FC = () => {
 	const { isOpen, onClose, setNewFilters } = useFilterStore()
 
 	const fetchFilters = async (): Promise<FilterItem[]> => {
-		const response = await fetch('src/temp/filterData.json')
+		const response = await fetch('/filterData.json')
 		const data = await response.json()
 		return data.filterItems
 	}
