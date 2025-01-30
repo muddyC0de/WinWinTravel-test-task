@@ -15,8 +15,8 @@ import { useQuery } from '@tanstack/react-query'
 
 import { FilterItem } from '@api/types/Filter'
 
-import { useConfirmStore } from '@store/use-confirm'
-import { useFilterStore } from '@store/use-filters'
+import { useConfirmStore } from '@store/useConfirm'
+import { useFilterStore } from '@store/useFilters'
 
 import { FiltersBlock } from './filtersBlock'
 
@@ -25,9 +25,14 @@ export const FilterModal: React.FC = () => {
 	const { isOpen, onClose, setNewFilters } = useFilterStore()
 
 	const fetchFilters = async (): Promise<FilterItem[]> => {
-		const response = await fetch('/filterData.json')
-		const data = await response.json()
-		return data.filterItems
+		try {
+			const response = await fetch('/filterData.json')
+			const data = await response.json()
+			return data.filterItems
+		} catch (error) {
+			console.error('[FETCHING_ERROR]', error)
+			return []
+		}
 	}
 
 	const onApply = () => {

@@ -4,7 +4,7 @@ import { Box, Checkbox, Divider, Grid, Heading } from '@chakra-ui/react'
 
 import { FilterItem } from '@api/types/Filter'
 
-import { useFilterStore } from '@store/use-filters'
+import { useFilterStore } from '@store/useFilters'
 
 interface Props {
 	item: FilterItem
