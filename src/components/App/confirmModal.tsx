@@ -9,8 +9,9 @@ import {
 	ModalHeader,
 	ModalOverlay
 } from '@chakra-ui/react'
-import { useConfirmStore } from 'store/use-confirm'
-import { useFilterStore } from 'store/use-filters'
+
+import { useConfirmStore } from '@store/use-confirm'
+import { useFilterStore } from '@store/use-filters'
 
 export const ConfirmModal: React.FC = () => {
 	const {

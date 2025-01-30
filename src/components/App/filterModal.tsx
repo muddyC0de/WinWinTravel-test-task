@@ -12,10 +12,11 @@ import {
 	ModalOverlay
 } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import { useConfirmStore } from 'store/use-confirm'
-import { useFilterStore } from 'store/use-filters'
 
 import { FilterItem } from '@api/types/Filter'
+
+import { useConfirmStore } from '@store/use-confirm'
+import { useFilterStore } from '@store/use-filters'
 
 import { FiltersBlock } from './filtersBlock'
 

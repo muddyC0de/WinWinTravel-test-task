@@ -1,5 +1,6 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
-import { useFilterStore } from 'store/use-filters'
+
+import { useFilterStore } from '@store/use-filters'
 
 import { ConfirmModal } from './confirmModal'
 import { FilterModal } from './filterModal'
