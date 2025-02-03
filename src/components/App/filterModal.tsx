@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 import {
 	Box,
@@ -26,6 +27,7 @@ export const FilterModal: React.FC = () => {
 	const isOpen = useFilterModalStore(state => state.isOpen)
 	const onClose = useFilterModalStore(state => state.onClose)
 
+	const { t } = useTranslation()
 	const applyFilters = useAppliedFiltersStore(state => state.applyFilters)
 	const { setNewFilters, newFilters, setShowAppliedFilters, resetFilters } =
 		useNewFiltersStore()
@@ -63,7 +65,6 @@ export const FilterModal: React.FC = () => {
 		queryFn: getFilters
 	})
 
-	console.log(111)
 	return (
 		<>
 			<Modal
@@ -76,12 +77,14 @@ export const FilterModal: React.FC = () => {
 						mb={'25px'}
 						color={'#31393C'}
 					>
-						Filter
+						{t('filterModal.title')}
 					</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						{isPending && <div>Loading...</div>}
-						{error && <div>Error: {error.message}</div>}
+						{isPending && <div>{t('filterModal.loading')}</div>}
+						{error && (
+							<div>{t('filterModal.error', { message: error.message })}</div>
+						)}
 						{data &&
 							data.map(item => (
 								<Box
@@ -103,7 +106,7 @@ export const FilterModal: React.FC = () => {
 							w={'184px'}
 							onClick={onApply}
 						>
-							Apply
+							{t('filterModal.apply')}
 						</Button>
 
 						<Box
@@ -117,15 +120,15 @@ export const FilterModal: React.FC = () => {
 							role="button"
 							onClick={onClearParameters}
 						>
-							Clear all parameters
+							{t('filterModal.clearParameters')}
 						</Box>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
 			<ConfirmModal
-				title="Do you want to apply new filter"
-				confirmText="Apply new filter"
-				cancelText="Use old filter"
+				title={t('filterModal.confirmTitle')}
+				confirmText={t('filterModal.confirmText')}
+				cancelText={t('filterModal.cancelText')}
 				isOpen={isOpenConfirm}
 				onClose={onCloseConfirm}
 				onConfirm={onConfirm}

@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 
 import { useAppliedFiltersStore } from '@store/useAppliedFilters'
