@@ -10,6 +10,7 @@ i18n.use(initReactI18next).init({
 	debug: true,
 	// Remove on connect language detector
 	lng: I18N_DEFAULT_LANGUAGE,
+	fallbackLng: 'en',
 	interpolation: {
 		escapeValue: false
 	},

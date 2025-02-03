@@ -1,12 +1,10 @@
 {
-	"filterModal": {
-		"title": "Filter",
-		"apply": "Apply",
-		"clearParameters": "Clear all parameters",
-		"confirmTitle": "Do you want to apply new filter",
-		"confirmText": "Apply new filter",
-		"cancelText": "Use old filter",
-		"loading": "Loading...",
-		"error": "Error: {{message}}"
-	}
+	"title": "Filter",
+	"apply": "Apply",
+	"clearParameters": "Clear all parameters",
+	"confirmTitle": "Do you want to apply new filter",
+	"confirmText": "Apply new filter",
+	"cancelText": "Use old filter",
+	"loading": "Loading...",
+	"error": "Error: {{message}}"
 }
