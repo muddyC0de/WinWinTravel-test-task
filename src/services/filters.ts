@@ -2,7 +2,7 @@ import { FilterItem } from '@api/types/Filter'
 
 export const getFilters = async (): Promise<FilterItem[]> => {
 	try {
-		const response = await fetch('/src/temp/filterData.json')
+		const response = await fetch('/filterData.json')
 		const data = await response.json()
 		return data.filterItems
 	} catch (error) {
