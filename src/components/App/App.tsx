@@ -1,21 +1,17 @@
-import { Box, Heading, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 
-import { useFilterStore } from '@store/useFilters'
+import { useAppliedFiltersStore } from '@store/useAppliedFilters'
+import { useFilterModalStore } from '@store/useFilterModal'
+import { useNewFiltersStore } from '@store/useNewFilters'
 
-import { ConfirmModal } from './confirmModal'
 import { FilterModal } from './filterModal'
 
 export const App = () => {
-	const {
-		isOpen,
-		isOldFilters,
-		currentFilters,
-		newFilters,
-		onOpen,
-		setIsOldFilters,
-		setCurrentFilters,
-		setNewFilters
-	} = useFilterStore()
+	const isOpen = useFilterModalStore(state => state.isOpen)
+	const onOpen = useFilterModalStore(state => state.onOpen)
+
+	const newFilters = useNewFiltersStore(state => state.newFilters)
+	const appliedFilters = useAppliedFiltersStore(state => state.appliedFilters)
 
 	return (
 		<Box
@@ -61,20 +57,10 @@ export const App = () => {
 							size="md"
 							color="gray.700"
 						>
-							Old Filters State
-						</Heading>
-						<Text>{isOldFilters ? 'True' : 'False'}</Text>
-					</Box>
-
-					<Box>
-						<Heading
-							size="md"
-							color="gray.700"
-						>
-							Current Filters ids
+							Applied Filters ids
 						</Heading>
 						<Text>
-							<pre>{JSON.stringify(currentFilters, null, 2)}</pre>
+							<pre>{JSON.stringify(appliedFilters, null, 2)}</pre>
 						</Text>
 					</Box>
 
@@ -98,54 +84,15 @@ export const App = () => {
 					mt={6}
 				>
 					<Box>
-						<Text
-							fontSize="sm"
-							color="gray.500"
-							cursor="pointer"
+						<Button
+							variant={'outline'}
 							onClick={onOpen}
-							_hover={{ textDecoration: 'underline' }}
 						>
 							Open Modal
-						</Text>
-					</Box>
-
-					<Box>
-						<Text
-							fontSize="sm"
-							color="gray.500"
-							cursor="pointer"
-							onClick={() => setCurrentFilters(['twin-beds', 'double-bed'])}
-							_hover={{ textDecoration: 'underline' }}
-						>
-							Set Current Filters
-						</Text>
-					</Box>
-					<Box>
-						<Text
-							fontSize="sm"
-							color="gray.500"
-							cursor="pointer"
-							onClick={() => setNewFilters(['gym', 'spa'])}
-							_hover={{ textDecoration: 'underline' }}
-						>
-							Set New Filters
-						</Text>
-					</Box>
-
-					<Box>
-						<Text
-							fontSize="sm"
-							color="gray.500"
-							cursor="pointer"
-							onClick={() => setIsOldFilters(!isOldFilters)}
-							_hover={{ textDecoration: 'underline' }}
-						>
-							Toggle Old Filters
-						</Text>
+						</Button>
 					</Box>
 				</Stack>
 
-				<ConfirmModal />
 				<FilterModal />
 			</Box>
 		</Box>

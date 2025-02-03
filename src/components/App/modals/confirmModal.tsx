@@ -3,6 +3,7 @@ import React from 'react'
 import {
 	Button,
 	Modal,
+	ModalBody,
 	ModalCloseButton,
 	ModalContent,
 	ModalFooter,
@@ -10,30 +11,27 @@ import {
 	ModalOverlay
 } from '@chakra-ui/react'
 
-import { useConfirmStore } from '@store/useConfirm'
-import { useFilterStore } from '@store/useFilters'
+interface Props {
+	title: string
+	description?: string
+	confirmText: string
+	cancelText: string
+	isOpen: boolean
+	onClose: () => void
+	onConfirm: () => void
+	onCancel: () => void
+}
 
-export const ConfirmModal: React.FC = () => {
-	const {
-		currentFilters,
-		newFilters,
-		setCurrentFilters,
-		setNewFilters,
-		setIsOldFilters
-	} = useFilterStore()
-	const { isOpen, onClose } = useConfirmStore()
-
-	const onConfirm = () => {
-		setCurrentFilters([...newFilters])
-		setIsOldFilters(false)
-		onClose()
-	}
-
-	const onCancel = () => {
-		setNewFilters(currentFilters)
-		setIsOldFilters(true)
-		onClose()
-	}
+export const ConfirmModal: React.FC<Props> = ({
+	title,
+	description,
+	confirmText,
+	cancelText,
+	isOpen,
+	onClose,
+	onConfirm,
+	onCancel
+}) => {
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -48,10 +46,10 @@ export const ConfirmModal: React.FC = () => {
 					marginBottom={'60px'}
 					color={'gray.500'}
 				>
-					Do you want to apply new filter
+					{title}
 				</ModalHeader>
 				<ModalCloseButton />
-
+				<ModalBody>{description}</ModalBody>
 				<ModalFooter
 					display={'flex'}
 					justifyContent={'center'}
@@ -64,7 +62,7 @@ export const ConfirmModal: React.FC = () => {
 						w={'280px'}
 						onClick={onCancel}
 					>
-						Use old filter
+						{cancelText}
 					</Button>
 					<Button
 						w={'280px'}
@@ -73,7 +71,7 @@ export const ConfirmModal: React.FC = () => {
 						onClick={onConfirm}
 						ml={3}
 					>
-						Apply new filter
+						{confirmText}
 					</Button>
 				</ModalFooter>
 			</ModalContent>

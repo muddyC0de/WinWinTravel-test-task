@@ -4,36 +4,44 @@ import { Box, Checkbox, Divider, Grid, Heading } from '@chakra-ui/react'
 
 import { FilterItem } from '@api/types/Filter'
 
-import { useFilterStore } from '@store/useFilters'
+import { useAppliedFiltersStore } from '@store/useAppliedFilters'
+import { useNewFiltersStore } from '@store/useNewFilters'
 
 interface Props {
 	item: FilterItem
 }
 
 export const FiltersBlock: React.FC<Props> = ({ item }) => {
-	const {
-		currentFilters,
-		newFilters,
-		setNewFilters,
-		isOldFilters,
-		setIsOldFilters
-	} = useFilterStore()
+	const newFilters = useNewFiltersStore(state => state.newFilters)
+	const setNewFilters = useNewFiltersStore(state => state.setNewFilters)
+	const showAppliedFilters = useNewFiltersStore(
+		state => state.showAppliedFilters
+	)
+	const setShowAppliedFilters = useNewFiltersStore(
+		state => state.setShowAppliedFilters
+	)
+
+	const appliedFilters = useAppliedFiltersStore(state => state.appliedFilters)
+
+	const updateFilters = (item: string, isChecked: boolean) => {
+		const updatedFilters = showAppliedFilters
+			? [...appliedFilters]
+			: [...newFilters]
+
+		setNewFilters(
+			isChecked
+				? [...updatedFilters, item]
+				: updatedFilters.filter(id => id !== item)
+		)
+
+		setShowAppliedFilters(false)
+	}
 
 	const onCheckboxChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
 		item: string
 	) => {
-		const isChecked = e.target.checked
-
-		if (isChecked) {
-			setNewFilters([...newFilters, item])
-		}
-
-		if (!isChecked) {
-			setNewFilters(newFilters.filter(id => id !== item))
-		}
-
-		setIsOldFilters(false)
+		updateFilters(item, e.target.checked)
 	}
 
 	return (
@@ -56,8 +64,8 @@ export const FiltersBlock: React.FC<Props> = ({ item }) => {
 				{item.options.map(option => (
 					<Checkbox
 						isChecked={
-							isOldFilters
-								? currentFilters.includes(option.id)
+							showAppliedFilters
+								? appliedFilters.includes(option.id)
 								: newFilters.includes(option.id)
 						}
 						onChange={e => onCheckboxChange(e, option.id)}

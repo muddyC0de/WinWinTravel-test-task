@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 
-interface ConfirmState {
+interface FilterModalState {
 	isOpen: boolean
 	onOpen: () => void
 	onClose: () => void
 }
 
-export const useConfirmStore = create<ConfirmState>(set => ({
+export const useFilterModalStore = create<FilterModalState>(set => ({
 	isOpen: false,
 	onOpen: () => set({ isOpen: true }),
 	onClose: () => set({ isOpen: false })
